@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dinner planner</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+    <style type="text/css">
+    .box{ 
+    	margin-top: 10px;
+    	margin-bottom: 10px;
+    	padding-left: 5px;
+    	padding-right: 5px;
+    	padding-top: 0px;
+        padding-bottom: 10px;
+        border: 0.5px solid gray; 
+    }
+
+    .dishbox{
+    	padding: 5px;
+    	margin: 5px;
+        border: 0.5px solid gray; 
+    }
+
+    .innerbox{
+    	padding: 5px;
+    	margin: 5px;
+        border: 0.5px solid gray; 
+    }
+    .description{
+    	text-align: justify;
+    }
+    </style>
+  </head>
+  
+  <body>
+  	<script type="text/javascript">
+  	function changeNumOfGuests(){ 
+  		/*
+  		var numberOfGuests = 0;
+  		numberOfGuests = numberOfGuests - 1;
+  		console.log(numberOfGuests); 
+  	    document.getElementById("numberOfGuests").innerHTML = numberOfGuests;
+  	    */
+  	    console.log(document.getElementById("numberOfGuests").value);
+  	    }
+
+    function chgDishType() {
+    	//alert("chgType");
+    	var index = document.getElementById("chgType").selectedIndex;
+        var type = document.getElementsByTagName("option")[index].value;
+        //alert(type); 
+    }
+  	</script>	
+    
+	<div class="container">
+		<div class="row box">
+			<h1>HOMELETTE</h1>
+			<p>From the best chefs in the world directly into your kitchen</p>
+		</div>
+		<div  class="row box">
+			<div class="col-md-2">
+				<div class="row" id = "exampleView">
+					<h3>My Dinner</h3>
+                    <!--
+					<span id="numberOfGuests"></span>
+					<button id="minusGuest" class="btn" onclick="changeNumOfGuests()"><span class="glyphicon glyphicon-minus"></span></button>					
+					<button id="plusGuest" class="btn" onclick="changeNumOfGuests()"><span class="glyphicon glyphicon-plus"></span></button>  -->
+                    Number of Guest
+                    <input type = "number" min="0" max="1000" width = "5px" id="numberOfGuests" onchange="changeNumOfGuests()">
+
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-6">Dish Name</div>
+					<div class="col-md-6">Cost</div>
+				</div>
+			</div>
+
+			<div class="col-md-10">
+				<div class="row box" >
+					<span id="dishType"></span>
+					<div class="col-md-12">
+						<h3>select dish</h3>
+				    </div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="col-md-6">
+								<input class="form-control" type="text" placeholder="Enter key words">
+							</div>
+							<div class="col-md-3">
+								<button type="submit" class="btn btn-primary">Search</button>							
+						    </div>	
+						</div>
+						
+						<div class="col-md-3">
+							<select id = "filter" class="form-control" >
+								<option id = "starter" value = "starter" >Starter</option>
+								<option id = "mainDish" value = "main dish" >Main Dishes</option>
+								<option id = "dessert" value = "dessert">Dessert</option>
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="row dishbox" id = "ListDishesView"> 
+                   	<span id="listAllDishes"></span>
+				</div>
+			</div>
+		</div>
+
+        <!--
+		<h1>Dinner planner</h1>
+		<div id="exampleView">
+			<div>
+				Number of guests: <span id="numberOfGuests"></span>
+			</div>
+			<div>
+          <button id="minusGuest" class="btn" onclick="changeNumOfGuests()"><span class="glyphicon glyphicon-minus"></span></button>
+				<button id="plusGuest" class="btn" onclick="changeNumOfGuests()"><span class="glyphicon glyphicon-plus"></span></button>
+			</div>
+		</div>
+        -->
+
+	</div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+	<!-- The application JavaScript code -->
+	<script src="js/app.js"></script>
+	<script src="js/model/dinnerModel.js"></script> 
+	<script src="js/view/exampleView.js"></script>
+	<script src="js/view/exampleViewController.js"></script>
+  </body>
+</html>
