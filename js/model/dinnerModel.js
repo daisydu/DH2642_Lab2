@@ -5,9 +5,8 @@ var DinnerModel = function() {
 	// and selected dinner options for dinner menu
     
     var num;
-    var numberOfGuests = 0;
-    var type = 'starter';
-
+    var numberOfGuests = 10;
+    var menu = [1,2,3];
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
@@ -24,33 +23,101 @@ var DinnerModel = function() {
 	//Returns the dish that is on the menu for selected type 
 	this.getSelectedDish = function(type) {
 		//TODO Lab 2
-		return type;
+		var dishType;
+		if ( type == 'starter') {
+			dishType = 'starter';
+		}else if ( type == 'main dish') {
+			dishType = 'main dish';
+		}else if ( type == 'dessert') {
+			dishType = 'dessert';
+		};
+		
+		return dishType;
 	}
 
 	//Returns all the dishes on the menu.
 	this.getFullMenu = function() {
 		//TODO Lab 2
+		var dishesOnMenu = [];
+		for (var i = 0; i < menu.length; i++) {
+			dishesOnMenu.push(this.getDish(menu[i]));
+		};
+        return dishesOnMenu;
+	}
+
+	this.getDishIngredients = function(id) {
+		var thisDish;
+		thisDish = this.getDish(id);
+		//console.log(thisDish);
+		var ingredients = thisDish.ingredients;
+		var amount;
+		var guestNum = this.getNumberOfGuests();
+
+		for (var j = 0; j < ingredients.length; j++) {
+				ingredients[j].quantity = guestNum * ingredients[j].quantity;
+				ingredients[j].price = guestNum * ingredients[j].price;
+			};
+
+		return ingredients;
+	}
+
+	this.getTotalDishPrice = function(id){
+		var thisDish;
+		ingredients = this.getDishIngredients(id);
+		var totalPrice = 0;
+		for (var i = 0; i < ingredients.length; i++) {
+			totalPrice += ingredients[i].price;
+		};
+		return totalPrice;
 	}
 
 	//Returns all ingredients for all the dishes on the menu.
 	this.getAllIngredients = function() {
 		//TODO Lab 2
+		var dish;
+		var ingredients;
+		var allIngreOnMenu = [];
+        
+		for (var i = 0; i < menu.length; i++) {
+			dish = this.getDish(menu[i]);
+			ingredients = dish.ingredients;
+			for (var j = 0; j < ingredients.length; j++) {
+				allIngreOnMenu.push(ingredients[j]);
+			};
+		}; 
+        return allIngreOnMenu;
 	}
 
 	//Returns the total price of the menu (all the ingredients multiplied by number of guests).
 	this.getTotalMenuPrice = function() {
 		//TODO Lab 2
+        var dish;
+        var allIngredients = this.getAllIngredients();
+        var guestNum = this.getNumberOfGuests();
+        var totalPrice;
+       
+        //The loop to get all the price and pass the value of the price
+        for (var i = 0; i < allIngredients.length; i++) {
+        	totalPrice += (allIngredients[i].price * guestNum);
+        	//console.log(totalPrice);
+        };  
+        
+        return totalPrice;
 	}
 
 	//Adds the passed dish to the menu. If the dish of that type already exists on the menu
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
+        menu.push(id);
+        return menu;
 	}
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
 		//TODO Lab 2
+		var index = menu.indexOf("id");
+		delete menu[index];
 	}
 
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
@@ -95,7 +162,7 @@ var DinnerModel = function() {
 	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
 	var dishes = [{
 		'id':1,
-		'name':'French toast',
+		'name':'French toast 123',
 		'type':'starter',
 		'image':'toast.jpg',
 		'description':"In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.",

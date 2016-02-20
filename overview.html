@@ -20,6 +20,7 @@
     }
 
     #filter{
+    	padding-top: 5px;
     	background: rgb(249,229,156)
     }
 
@@ -52,13 +53,23 @@
   		text-align: center;  
   			
     }
+    .total{
+    	height:140px; 
+    	position: relative;"
+    }
+    .total p{
+    	position: absolute;
+    	bottom: 0px;
+    	padding:0px;
+    	margin: 0px;
 
-    .description{
-    	height: 72px;
+    }
+
+    .price{
+    	height: 20px;
     	padding: 5px;
-    	text-align: justify;
-    	font-size: 12px;
-    	overflow: hidden;
+    	text-align: right;
+
     }
     </style>
   </head>
@@ -88,69 +99,44 @@
 			<h1>HOMELETTE</h1>
 			<p>From the best chefs in the world directly into your kitchen</p>
 		</div>
-		<div  class="row box">
-			<div class="col-md-2">
-				<table class="table">
-				<tr><h3>My Dinner</h3></tr>
-				<tr>
-					<td>People</td>
-					<td>
-                    <input type = "number" min="0" max="1000" width = "5px" id="numberOfGuests" onchange="changeNumOfGuests()">
-					</td>
-				</tr>
-				<!--不知道怎么扩大table的区域？？？-->
-				<tr>
-					<td >Dish Name</td>
-					<td style="text-align:right;" >cost</td>	 
-				</tr>
-				<tr>
-					<td>pending</td>
-					<td style="text-align:right;">0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align:right;">SEK 0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2"><button type="button" style="width:100%; ">Confirm Dinner</button></td>
-					
-				</tr>
-				</table> 	 
+
+		<div class="row box" id="filter">
+			<div div class="col-md-9">
+				<h2>My Dinner: 4 people</h2>
 			</div>
-
-			<div class="col-md-10">
-				<div class="row box" id="filter">
-					<div class="col-md-12">
-						<h3>select dish</h3>
-				    </div>
-
-					<div class="row">
-						<div class="col-md-6">
-							<div class="col-md-6">
-								<input class="form-control" type="text" placeholder="Enter key words">
-							</div>
-							<div class="col-md-3">
-								<button type="submit" class="btn btn-primary">Search</button>							
-						    </div>	
-						</div>
-						
-						<div class="col-md-3">
-							<select class="form-control">
-								<option>Starter</option>
-								<option>Main Dishes</option>
-								<option>Dessert</option>
-							</select>
-						</div>
-					</div>
-				</div>
-
-				<div class="row dishcontainer" id = "ListDishesView">
-					
-                   	<span id="listAllDishes"></span>
-				    
-				</div>
-				
+			<div div class="col-md-3" style="padding-top:25px;">
+				<button type="button" >Go Back and Edit Dinner</button>
 			</div>
 		</div>
+
+		<div  class="row box" id = "OverviewDinnerView">
+                <!--
+				    <div class="col-md-2">
+						<div class="dish">
+						<div><img src="images/bakedbrie.jpg"></div>
+						<div class="dishname">lasagne</div>
+						</div>
+						<div class="price">
+							83.40 SEK
+						</div>
+				    </div>
+
+                -->
+                <center><div id = "listSelectDishes"></div></center>
+
+				    <div class="col-md-2" style="border-">
+				    	<div class="total" ><p>Total:</p></div>
+						<div class="price" id = "totalPrice"></div>
+				    </div>
+		</div>
+		<div class="row box">
+		<div class="col-md-2 col-md-offset-5">
+			<button type="button" style="margin: 10px 10px 5px 25px;">Print Full Recipe</button>
+		</div>
+		</div>
+				
+		
+	</div>
 
         <!--
 		<h1>Dinner planner</h1>

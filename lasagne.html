@@ -19,20 +19,29 @@
         border: 0.5px solid gray; 
     }
 
-    #filter{
-    	background: rgb(249,229,156)
-    }
 
     .table{
     	border: 0.5px solid gray; 
     }
+    .ingtable{
+    	width: 100%;
+
+    	border-bottom: 1px solid gray;
+    }
+
+    .ingtable tr td{
+    	width: 15%;
+    	padding:5px 0px;
+    }
+
+
 
     .dishcontainer{
-    	margin-top: 10px;
-    	margin-bottom: 10px;
-    	padding: 0px 0px 10px 10px;
         border: 0.5px solid gray; 
     }
+
+
+
     .dishbox{
     	margin: 10px 20px 10px 10px;
     	padding: 0px 0px 10px 0px;
@@ -41,25 +50,50 @@
 
     .dish{
     	margin: 5px;
-    	padding: 5px;
-    	border: 0.5px solid gray; 
+    	padding: 20px;
+    	margin-right: 100px;
+
     }
-    .dish img{
+    .dishimg{
+    	margin: 30px 5px 10px 5px;
+
+ 
+    }
+
+    .dishimg img{
+    	width: 400px;
+    	height: 200px;
+    }
+    .dishtitle{
     	width: 100%;
-    	height: 100px;
-    }
-    .dishname{
-  		text-align: center;  
+    	height: 20px;
+    	padding-left: 5px;
+  		font-size: 30px;
+  		font-style: bold;  
   			
     }
 
-    .description{
-    	height: 72px;
+    .dishdescription{
+    	width: 400px;
     	padding: 5px;
     	text-align: justify;
-    	font-size: 12px;
-    	overflow: hidden;
     }
+
+    .ingredients{
+    	margin-left:20px;
+    	padding: 20px;
+    	background-color: rgb(249,229,156);
+
+    	border: 0.5px solid gray; 
+
+    }
+    .preparation{
+    	font-size: 30px; 
+    	font-style: bold; 
+    	padding-left: 25px;
+    }
+
+
     </style>
   </head>
   
@@ -84,11 +118,16 @@
 
     
 	<div class="container">
+	<!--title-->
 		<div class="row box">
 			<h1>HOMELETTE</h1>
 			<p>From the best chefs in the world directly into your kitchen</p>
 		</div>
+
+
 		<div  class="row box">
+
+		<!--cost view-->
 			<div class="col-md-2">
 				<table class="table">
 				<tr><h3>My Dinner</h3></tr>
@@ -98,7 +137,7 @@
                     <input type = "number" min="0" max="1000" width = "5px" id="numberOfGuests" onchange="changeNumOfGuests()">
 					</td>
 				</tr>
-				<!--不知道怎么扩大table的区域？？？-->
+
 				<tr>
 					<td >Dish Name</td>
 					<td style="text-align:right;" >cost</td>	 
@@ -116,39 +155,83 @@
 				</tr>
 				</table> 	 
 			</div>
+		<!--dish view-->
+			<div class="col-md-10 dishcontainer">
 
-			<div class="col-md-10">
-				<div class="row box" id="filter">
-					<div class="col-md-12">
-						<h3>select dish</h3>
+				<!--dish detail-->
+				<div class="row" id = "SelectDishView">
+
+					<div class="col-md-5 dish">
+						<div class="dishtitle">lasagne</div>
+										
+						<div class="dishimg">
+						<img src="images/lasagne.jpg">
+						</div>
+
+						<div class="dishdescription">
+							In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot. 
+						</div>
+
+
+						<div><button type="button" style="width:200px;margin: 5px; ">Back to Select Dish</button></div>
+				    	
+				 	</div>
+
+				 	<div class="col-md-5 ingredients">
+						<table class="ingtable">
+
+							<tr style="border-bottom: 1px solid gray; padding-bottom: 20px;">
+							<th colspan="4" style="padding-bottom: 10px;">
+							Ingredients for <span class = "numberOfPeople"></span> people</th>
+							</tr>
+
+							<tbody id = "dishIngre"></tbody>
+                        <!--
+							<tr>
+							<td>bsp</td>
+							<td style="width: 55%;">olive oil</td>
+							<td>SEK</td>
+							<td>0.20</td>
+							</tr>
+                        
+							<tr>
+							<td>bsp</td>
+							<td style="width: 55%;">olive oil</td>
+							<td>SEK</td>
+							<td>0.20</td>
+							</tr>	
+						-->
+					
+						</table>
+
+						<div><button type="button" style="width:200px;margin: 5px; ">Confirm Dish</button></div>
+				    	
+				 	</div>
+
+				</div>
+
+				<div class="row">
+				<div class="preparation">Preparation</div>
+					
+				</div>
+
+<!--
+				 	<div class="col-md-5 dishbox">
+						<div class="dish">
+						<div><img src="images/icecream.jpg"></div>
+						<div class="dishname">lasagne</div>
+						</div>
+						<div class="description">
+							In a large mixing bowl, beat the eggs.
+						</div>
 				    </div>
 
-					<div class="row">
-						<div class="col-md-6">
-							<div class="col-md-6">
-								<input class="form-control" type="text" placeholder="Enter key words">
-							</div>
-							<div class="col-md-3">
-								<button type="submit" class="btn btn-primary">Search</button>							
-						    </div>	
-						</div>
-						
-						<div class="col-md-3">
-							<select class="form-control">
-								<option>Starter</option>
-								<option>Main Dishes</option>
-								<option>Dessert</option>
-							</select>
-						</div>
-					</div>
-				</div>
 
-				<div class="row dishcontainer" id = "ListDishesView">
-					
-                   	<span id="listAllDishes"></span>
-				    
 				</div>
-				
+				<div>
+					<h3>Preparation</h3>
+				</div>
+-->						
 			</div>
 		</div>
 

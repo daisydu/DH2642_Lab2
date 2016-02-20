@@ -20,46 +20,44 @@
     }
 
     #filter{
+    	padding-top: 5px;
     	background: rgb(249,229,156)
     }
 
-    .table{
-    	border: 0.5px solid gray; 
-    }
-
-    .dishcontainer{
-    	margin-top: 10px;
-    	margin-bottom: 10px;
-    	padding: 0px 0px 10px 10px;
-        border: 0.5px solid gray; 
-    }
-    .dishbox{
-    	margin: 10px 20px 10px 10px;
-    	padding: 0px 0px 10px 0px;
-    	border: 0.5px solid gray; 
-    }
 
     .dish{
     	margin: 5px;
     	padding: 5px;
     	border: 0.5px solid gray; 
     }
+    .dishimg{
+    	padding: 20px; 
+    }
     .dish img{
     	width: 100%;
     	height: 100px;
     }
     .dishname{
-  		text-align: center;  
+    	font-weight: 600;
+    	font-size: 22px;
   			
     }
+    .dishtext{
+    	padding-top: 10px;
 
-    .description{
-    	height: 72px;
-    	padding: 5px;
-    	text-align: justify;
-    	font-size: 12px;
-    	overflow: hidden;
     }
+    .dishinfo{
+    	padding: 20px; 
+    }
+    .dishpre{
+     	padding: 20px;    	
+    }
+    .dishpretitle{
+    	font-weight: 400;
+    	font-size: 18px;
+    }
+
+    
     </style>
   </head>
   
@@ -72,85 +70,34 @@
   		console.log(numberOfGuests); 
   	    document.getElementById("numberOfGuests").innerHTML = numberOfGuests;
   	    }
-
   	
         $("select").change(function(){
         	alert("I am changed");
         });
   
-
   	</script>
-	
-
-    
+	    
 	<div class="container">
 		<div class="row box">
 			<h1>HOMELETTE</h1>
 			<p>From the best chefs in the world directly into your kitchen</p>
 		</div>
-		<div  class="row box">
-			<div class="col-md-2">
-				<table class="table">
-				<tr><h3>My Dinner</h3></tr>
-				<tr>
-					<td>People</td>
-					<td>
-                    <input type = "number" min="0" max="1000" width = "5px" id="numberOfGuests" onchange="changeNumOfGuests()">
-					</td>
-				</tr>
-				<!--不知道怎么扩大table的区域？？？-->
-				<tr>
-					<td >Dish Name</td>
-					<td style="text-align:right;" >cost</td>	 
-				</tr>
-				<tr>
-					<td>pending</td>
-					<td style="text-align:right;">0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align:right;">SEK 0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2"><button type="button" style="width:100%; ">Confirm Dinner</button></td>
-					
-				</tr>
-				</table> 	 
+
+		<div class="row box" id="filter">
+			<div div class="col-md-9">
+				<h2>My Dinner: 4 people</h2>
 			</div>
-
-			<div class="col-md-10">
-				<div class="row box" id="filter">
-					<div class="col-md-12">
-						<h3>select dish</h3>
-				    </div>
-
-					<div class="row">
-						<div class="col-md-6">
-							<div class="col-md-6">
-								<input class="form-control" type="text" placeholder="Enter key words">
-							</div>
-							<div class="col-md-3">
-								<button type="submit" class="btn btn-primary">Search</button>							
-						    </div>	
-						</div>
-						
-						<div class="col-md-3">
-							<select class="form-control">
-								<option>Starter</option>
-								<option>Main Dishes</option>
-								<option>Dessert</option>
-							</select>
-						</div>
-					</div>
-				</div>
-
-				<div class="row dishcontainer" id = "ListDishesView">
-					
-                   	<span id="listAllDishes"></span>
-				    
-				</div>
-				
+			<div div class="col-md-3" style="padding-top:25px;">
+				<button type="button" >Go Back and Edit Dinner</button>
 			</div>
 		</div>
+
+		<!--print detail-->
+		<div  class="row box" id = "OverviewDinnerView">   
+      <span id = "printDishes"></span>
+		</div>
+
+	</div>
 
         <!--
 		<h1>Dinner planner</h1>
