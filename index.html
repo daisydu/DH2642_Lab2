@@ -63,106 +63,117 @@
     </style>
   </head>
   
-  <body>
-  	<script type="text/javascript">
-
-  	function changeNumOfGuests(){ 
-  		var numberOfGuests = 0;
-  		numberOfGuests = numberOfGuests - 1;
-  		console.log(numberOfGuests); 
-  	    document.getElementById("numberOfGuests").innerHTML = numberOfGuests;
-  	    }
-
-  	
-        $("select").change(function(){
-        	alert("I am changed");
-        });
-  
-
-  	</script>
-	
-
-    
+  <body>  
 	<div class="container">
 		<div class="row box">
 			<h1>HOMELETTE</h1>
 			<p>From the best chefs in the world directly into your kitchen</p>
 		</div>
 		<div  class="row box">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<table class="table">
-				<tr><h3>My Dinner</h3></tr>
-				<tr>
-					<td>People</td>
-					<td>
-                    <input type = "number" min="0" max="1000" width = "5px" id="numberOfGuests" onchange="changeNumOfGuests()">
-					</td>
-				</tr>
-				<!--不知道怎么扩大table的区域？？？-->
-				<tr>
-					<td >Dish Name</td>
-					<td style="text-align:right;" >cost</td>	 
-				</tr>
-				<tr>
-					<td>pending</td>
-					<td style="text-align:right;">0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align:right;">SEK 0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2"><button type="button" style="width:100%; ">Confirm Dinner</button></td>
-					
-				</tr>
+					<tr><h3>My Dinner</h3></tr>
+	                
+	                <tr>
+		                Number of Guests: <div id = "GuestNumberView"> 
+		                	<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+							<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+			            	<span id="numberOfGuests"></span>
+			            </div>
+	     			</tr>
+					<!--不知道怎么扩大table的区域？？？-->
+					<tr>
+						<td >Dish Name</td>
+						<td style="text-align:right;" >cost</td>	 
+					</tr>
+					<tr>
+						<td>pending</td>
+						<td style="text-align:right;">0.00</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align:right;">SEK 0.00</td>
+					</tr>
+					<tr>
+						<td colspan="2"><button type="button" style="width:100%; ">Confirm Dinner</button></td>
+						
+					</tr>
 				</table> 	 
 			</div>
 
-			<div class="col-md-10">
-				<div class="row box" id="filter">
+			<div class="col-md-9">
+				<div class="row box" id = "ListDishesView">
 					<div class="col-md-12">
 						<h3>select dish</h3>
 				    </div>
 
-					<div class="row">
+					<div class="row" >
 						<div class="col-md-6">
 							<div class="col-md-6">
-								<input class="form-control" type="text" placeholder="Enter key words">
+								<input class="form-control" type="text" placeholder="Enter key words" id="keyWords">
 							</div>
 							<div class="col-md-3">
-								<button type="submit" class="btn btn-primary">Search</button>							
+								<button type="submit" class="btn btn-primary" id = "search">Search</button>			
 						    </div>	
 						</div>
 						
 						<div class="col-md-3">
-							<select class="form-control">
-								<option>Starter</option>
-								<option>Main Dishes</option>
-								<option>Dessert</option>
+							<select class="form-control" id = "selection" >
+								<option value="all" selected>All</option>
+								<option value="starter" >Starter</option>
+								<option value="main dish" >Main Dishes</option>
+								<option value="dessert" >Dessert</option>
 							</select>
 						</div>
 					</div>
+                    <div class="row dishcontainer">
+                   		<span id="listAllDishes"></span>
+					</div>
 				</div>
 
-				<div class="row dishcontainer" id = "ListDishesView">
-					
-                   	<span id="listAllDishes"></span>
-				    
-				</div>
+				
 				
 			</div>
+
+			<div class="row" id = "SelectDishView">
+
+					<div class="col-md-5 dish">
+						<div class="dishtitle">lasagne</div>
+										
+						<div class="dishimg">
+						<img src="images/lasagne.jpg">
+						</div>
+
+						<div class="dishdescription">
+							In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot. 
+						</div>
+
+
+						<div><button type="button" style="width:200px;margin: 5px; ">Back to Select Dish</button></div>
+				    	
+				 	</div>
+
+				 	<div class="col-md-5 ingredients">
+						<table class="ingtable">
+
+							<tr style="border-bottom: 1px solid gray; padding-bottom: 20px;">
+							<th colspan="4" style="padding-bottom: 10px;">
+							Ingredients for <span class = "numberOfPeople"></span> people</th>
+							</tr>
+
+							<tbody id = "dishIngre"></tbody>
+					
+						</table>
+
+						<div><button type="button" style="width:200px;margin: 5px; ">Confirm Dish</button></div>
+				    	
+				 	</div>
+
+				</div>
 		</div>
 
         <!--
 		<h1>Dinner planner</h1>
-		<div id="exampleView">
-			<div>
-				Number of guests: <span id="numberOfGuests"></span>
-			</div>
-			<div>
-          <button id="minusGuest" class="btn" onclick="changeNumOfGuests()"><span class="glyphicon glyphicon-minus"></span></button>
-				<button id="plusGuest" class="btn" onclick="changeNumOfGuests()"><span class="glyphicon glyphicon-plus"></span></button>
-			</div>
-		</div>
+		
         -->
 
 	</div>
@@ -176,6 +187,6 @@
 	<script src="js/app.js"></script>
 	<script src="js/model/dinnerModel.js"></script> 
 	<script src="js/view/exampleView.js"></script>
-	<script src="js/view/exampleViewController.js"></script>
+	<script src="js/view/ViewController.js"></script>
   </body>
 </html>
