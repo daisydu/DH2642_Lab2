@@ -1,35 +1,159 @@
 //ExampleView Object constructor
-
-var ExampleView = function (container,model) {
+var GuestNumberView = function (container,model) {
  
  // Get all the relevant elements of the view (ones that show data
  // and/or ones that responded to interaction)
+
+ // attach the view to listener
+ model.attach(this);
+
  this.numberOfGuests = container.find("#numberOfGuests");
  this.plusButton = container.find("#plusGuest");
  this.minusButton = container.find("#minusGuest");
+ var number = model.getNumberOfGuests();
+
+ this.numberOfGuests.html(number);
+
+ this.update = function(args){
+ 	if (args == "people") {
+ 		number = model.getNumberOfGuests();
+ 		this.numberOfGuests.html(number); 
+ 	}
+ }
+ 
+ // write an update function if their happened any changes
 }
 
 var ListDishesView = function (container, model){
 	// is a loop, print all dishes in that category
-	
+	model.attach(this);
     this.listAllDishes = container.find("#listAllDishes");
-    var dishType = model.getSelectedDish('starter','eggs');
-	var dishes = model.getAllDishes(dishType);
+    this.selectType = container.find("#selection");
+    this.search = container.find("#search");
+    this.keyWords = container.find("#keyWords");
+    //console.log(this.selectType.length);
+
+    //var dishType = model.getSelectedDish('starter','eggs');
+	//var dishes = model.getAllDishes('starter');
+	var dishes = [];
+	dishes = model.getAllDishes('all');
 	//var dishes = model.getAllDishes(dishType);
 	var alldishesHtml = "";
 
     for (var i = 0; i < dishes.length; i++) {
 
-		alldishesHtml +=  "<div class=\"col-md-2 dishbox\">" + 
-		                       "<div class=\" dish\"> " +
+		alldishesHtml +=  "<div class=\"col-md-3 dishbox\">" + 
+		                       "<a href=\'#\' class=\'selectDish\' id=\' "+ dishes[i].id +"\''><div class=\" dish\" id=\'dishID\' > " +
 							     "<center>" + " <img src=\'images/" + dishes[i].image + "\' ></center> " +
 							     " <div class=\"dishname\">" + dishes[i].name + "</div>" +
-							   "</div>" + 
+							   "</div></a>" + 
 							   "<div class=\"description\"> " + dishes[i].description + "</div>" +
 					      "</div>";
 					  }
 
+     //this.selectDish = container.find('#listAllDishes .selectDish');
+     //console.log(this.selectDish);
+
      this.listAllDishes.html(alldishesHtml);
+
+     this.update = function(args){
+     	//c
+        if (args == "dishType" || args == "filter") {
+        	
+        	var dishType = model.getSelectedDish();
+        	var filter = model.getFilter();
+        	var dishes = model.getAllDishes(dishType,filter);
+        	console.log(filter);
+     
+        var alldishesHtml = "";
+
+    	for (var i = 0; i < dishes.length; i++) {
+    		//console.log("hi");
+			alldishesHtml +=  "<div class=\"col-md-2 dishbox\">" + 
+		                       "<a href=\"#\"><div class=\" dish\"> " +
+							     "<center>" + " <img src=\'images/" + dishes[i].image + "\' ></center> " +
+							     " <div class=\"dishname\">" + dishes[i].name + "</div>" +
+							   "</div></a>" + 
+							   "<div class=\"description\"> " + dishes[i].description + "</div>" +
+					      "</div>";
+					  }
+    
+        this.listAllDishes.html(alldishesHtml);
+ 	};
+ } 
+}
+
+var SelectDishView = function (container, model){
+    // GET The number of people
+	/*
+	this.numberOfPeople = container.find(".numberOfPeople");
+	this.numberOfPeople.html(model.getNumberOfGuests());
+	*/
+
+	// Get the total price of selected dish;
+	model.attach(this);
+	this.update = function(args){
+		if (args == 'dishDetail') {
+			
+			var dishID = model.getDishID();
+			//console.log(dishID);
+			this.totalDishPrice = container.find("#totalDishPrice");
+			var totalPrice = model.getTotalDishPrice(dishID);
+			//console.log("the price is " + totalPrice);
+			this.totalDishPrice.html(totalPrice);
+
+    //Get the dish Name
+    		this.dishname = container.find("#dishName");
+
+	//Get the dish Introduction
+
+	//Get the dish Ingredients
+			this.dishIngre = container.find("#dishIngre");
+			var allIngre = model.getDishIngredients(dishID);
+			var getIngre = "";
+			for (var i = 0; i < allIngre.length; i++) {
+				getIngre +=  "<tr>" +
+						"<td>" + allIngre[i].quantity + "</td>" +
+						"<td>" + allIngre[i].unit + "</td>" +
+					    "<td style= \"width: 55%;\"> " + allIngre[i].name + "</td>" +
+						"<td> SEK </td> " + " " +
+						"<td> " + allIngre[i].price + " </td>" +
+					 "</tr></br>";
+			};
+
+			this.dishIngre.html(getIngre + " SEK " + totalPrice);
+		};
+	}
+
+    /*
+    var dishID = model.getDishID();
+	this.totalDishPrice = container.find("#totalDishPrice");
+	var totalPrice = model.getTotalDishPrice(dishID);
+	this.totalDishPrice.html(totalPrice);
+
+    //Get the dish Name
+    this.dishname = container.find("#dishName");
+
+	//Get the dish Introduction
+
+	//Get the dish Ingredients
+	this.dishIngre = container.find("#dishIngre");
+	var allIngre = model.getDishIngredients(dishID);
+	var getIngre = "";
+	for (var i = 0; i < allIngre.length; i++) {
+		getIngre +=  "<tr>" +
+						"<td>" + allIngre[i].quantity + "</td>" +
+						"<td>" + allIngre[i].unit + "</td>" +
+					    "<td style= \"width: 55%;\"> " + allIngre[i].name + "</td>" +
+						"<td> SEK </td> " + " " +
+						"<td> " + allIngre[i].price + " </td>" +
+					 "</tr></br>";
+	};
+
+	this.dishIngre.html(getIngre + " SEK " + totalPrice);
+	*/
+	
+
 }
 
 var OverviewDinnerView = function (container, model){
@@ -105,36 +229,5 @@ var PreparationView = function (container, model){
 
 }
 
-var SelectDishView = function (container, model){
-    // GET The number of people
-	this.numberOfPeople = container.find(".numberOfPeople");
-	this.numberOfPeople.html(model.getNumberOfGuests());
 
-	// Get the total price of selected dish;
-	this.totalDishPrice = container.find("#totalDishPrice");
-	var totalPrice = model.getTotalDishPrice(1);
-	this.totalDishPrice.html(totalPrice);
-
-    //Get the dish Name
-    this.dishname = container.find("#dishName");
-
-	//Get the dish Introduction
-
-	//Get the dish Ingredients
-	this.dishIngre = container.find("#dishIngre");
-	var allIngre = model.getDishIngredients(1);
-	var getIngre = "";
-	for (var i = 0; i < allIngre.length; i++) {
-		getIngre +=  "<tr>" +
-						"<td>" + allIngre[i].quantity + "</td>" +
-						"<td>" + allIngre[i].unit + "</td>" +
-					    "<td style= \"width: 55%;\"> " + allIngre[i].name + "</td>" +
-						"<td> SEK </td> " + " " +
-						"<td> " + allIngre[i].price + " </td>" +
-					 "</tr></br>";
-	};
-
-	this.dishIngre.html(getIngre + " SEK " + totalPrice);
-
-}
 

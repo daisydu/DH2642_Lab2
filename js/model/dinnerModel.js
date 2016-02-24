@@ -4,13 +4,45 @@ var DinnerModel = function() {
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
     
-    var num;
-    var numberOfGuests = 10;
+    var numberOfGuests = 0;
     var menu = [1,2,3];
+    var dishType = '';
+    var filter = '';
+    var dishID;
+    this.listeners = [];
+
+    // add an attach function
+    // add an notify function
+    // if the controller model make some changes, for each func that call of notify
+    // and call for the update function in view.js
+    
+    this.attach = function(listener){
+    	this.listeners.push(listener);
+    }
+
+    this.notify = function(args){
+    	/*
+    	for (var i = 0; i < this.listeners.length; i++) {
+    		this.listeners[i].update(args);
+    		//console.log(this.listeners[i]);
+       	};
+       	*/
+        for(key in this.listeners){
+			this.listeners[key].update(args);
+		}
+
+    }
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
-	    numberOfGuests = num;
+		if (num < 0) {
+           numberOfGuests
+		}else{
+			numberOfGuests = num;
+		};
+	    
+	    //console.log(numberOfGuests);
+	    this.notify("people");
 	}
 
 	// should return 
@@ -21,18 +53,44 @@ var DinnerModel = function() {
 	}
 
 	//Returns the dish that is on the menu for selected type 
-	this.getSelectedDish = function(type) {
+	this.setSelectedDish = function(type) {
 		//TODO Lab 2
-		var dishType;
 		if ( type == 'starter') {
 			dishType = 'starter';
 		}else if ( type == 'main dish') {
 			dishType = 'main dish';
 		}else if ( type == 'dessert') {
 			dishType = 'dessert';
+		}else if ( type == 'all') {
+			dishType = 'all';
 		};
-		
+		//console.log(dishType);
+		this.notify("dishType");
+	}
+
+	this.getSelectedDish = function(){
 		return dishType;
+	}
+
+	this.setDishID = function(id){
+        dishID = id;
+        //console.log("set id "+ dishID);
+        this.notify("dishDetail");
+	}
+
+	this.getDishID = function(){
+		//console.log("get id"+dishID);
+		return dishID;
+	}
+
+	this.setFilter = function(flt){
+        filter = flt;
+        //console.log("i am " + filter);
+        this.notify("filter");
+	}
+
+	this.getFilter = function(){
+        return filter;
 	}
 
 	//Returns all the dishes on the menu.
@@ -64,9 +122,12 @@ var DinnerModel = function() {
 	this.getTotalDishPrice = function(id){
 		var thisDish;
 		ingredients = this.getDishIngredients(id);
+		console.log(ingredients);
+		//console.log("how many ingredients: "+ingredients.length);
 		var totalPrice = 0;
 		for (var i = 0; i < ingredients.length; i++) {
 			totalPrice += ingredients[i].price;
+			console.log(ingredients[i]);
 		};
 		return totalPrice;
 	}
@@ -125,6 +186,29 @@ var DinnerModel = function() {
 	//if you don't pass any filter all the dishes will be returned
 	this.getAllDishes = function (type,filter) {
 		//console.log("filter");
+	if (type == 'all') {
+		//console.log(dishes);
+        return dishes;
+	}else{
+		return $(dishes).filter(function(index,dish) {
+		var found = true;
+		if(filter){
+			found = false;
+			$.each(dish.ingredients,function(index,ingredient) {
+				if(ingredient.name.indexOf(filter)!=-1) {
+					found = true;
+				}
+			});
+			if(dish.name.indexOf(filter) != -1)
+			{
+				found = true;
+			}
+		}
+	  	return dish.type == type && found;
+	  });
+	}
+
+	/*
 	  return $(dishes).filter(function(index,dish) {
 		var found = true;
 		if(filter){
@@ -140,7 +224,8 @@ var DinnerModel = function() {
 			}
 		}
 	  	return dish.type == type && found;
-	  });	
+	  });
+	  */	
 	}
 
 	//function that returns a dish of specific ID
