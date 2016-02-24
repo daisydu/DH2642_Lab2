@@ -24,11 +24,12 @@ var ListDishesViewController = function(view, model){
   });
 
   view.selectDish.click(function(){
-    
+    var value = [];
+    var selectClass = $(".selectDish");
+    var id = $(this).attr('id');
+    console.log(id);
+    model.setDishID(id); 
   });
 }
 
-this.selectDish = function(){
-    console.log("I am click");
-  }
 
