@@ -8,85 +8,56 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
-    <style type="text/css">
-    .box{ 
-    	margin-top: 10px;
-    	margin-bottom: 10px;
-    	padding-left: 5px;
-    	padding-right: 5px;
-    	padding-top: 0px;
-        padding-bottom: 10px;
-        border: 0.5px solid gray; 
-    }
+    <!--import index.CSS-->
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
 
-    #filter{
-    	background: rgb(249,229,156)
-    }
 
-    .table{
-    	border: 0.5px solid gray; 
-    }
-
-    .dishcontainer{
-    	margin-top: 10px;
-    	margin-bottom: 10px;
-    	padding: 0px 0px 10px 10px;
-        border: 0.5px solid gray; 
-    }
-    .dishbox{
-    	margin: 10px 20px 10px 10px;
-    	padding: 0px 0px 10px 0px;
-    	border: 0.5px solid gray; 
-    }
-
-    .dish{
-    	margin: 5px;
-    	padding: 5px;
-    	border: 0.5px solid gray; 
-    }
-    .dish img{
-    	width: 100%;
-    	height: 100px;
-    }
-    .dishname{
-  		text-align: center;  
-  			
-    }
-
-    .description{
-    	height: 72px;
-    	padding: 5px;
-    	text-align: justify;
-    	font-size: 12px;
-    	overflow: hidden;
-    }
-    </style>
   </head>
   
   <body>
-  	<script type="text/javascript">
 
-  	function changeNumOfGuests(){ 
-  		var numberOfGuests = 0;
-  		numberOfGuests = numberOfGuests - 1;
-  		console.log(numberOfGuests); 
-  	    document.getElementById("numberOfGuests").innerHTML = numberOfGuests;
-  	    }
+<!--startPage-->
+	<div class="container" id="startPage">
+<!--	   
+ <style type="text/css">
+	        body{
+	        background:url(images/Thanksgiving-Dinner.jpg);
+	        background-size: 100%, 100%;
+	        margin-left: 15px；
+	    } /*怎么调整背景位置？*/
+	    
+	    </style>
 
-  	
-        $("select").change(function(){
-        	alert("I am changed");
-        });
-  
 
-  	</script>
-	
+	    <script type="text/javascript">
+		var body = document.getElementsByTagName('body')[0];
+		body.style.backgroundImage = 'url(images/Thanksgiving-Dinner.jpg)';
+		</script>
+-->
+        <div class="row title">
+            <h1>HOMELETTE</h1>
+            <p>From the best chefs in the world directly into your kitchen</p>
+        </div>
+		<div class="createbox">
+			<div class="boxtitle">A Home Dinner Service</div>
+			<hr style="width: 95%; height: 2px; background-color: #000000; position: relative; top: -10px;" />
+			<div class="boxcontent">
+				lorem ipsum dolor sit amet, 
+			</div>
+			<div class="startbutton">start quickly</div>
+			<button type="button" class="btnStart"><a href="#menuPage">Create new dinner</a></button>
+			
+		</div>
 
-    
-	<div class="container">
+	</div>
+
+
+
+<!--menuPage-->
+	<div class="container" id="menuPage">
 		<div class="row box">
 			<h1>HOMELETTE</h1>
-			<p>From the best chefs in the world directly into your kitchen</p>
+			<p id="demo">From the best chefs in the world directly into your kitchen</p>
 		</div>
 		<div  class="row box">
 			<div class="col-md-2">
@@ -111,7 +82,7 @@
 					<td colspan="2" style="text-align:right;">SEK 0.00</td>
 				</tr>
 				<tr>
-					<td colspan="2"><button type="button" style="width:100%; ">Confirm Dinner</button></td>
+					<td colspan="2"><button type="button" id="confirmDinner" style="width:100%; ">Confirm Dinner</button></td>
 					
 				</tr>
 				</table> 	 
@@ -151,24 +122,229 @@
 				
 			</div>
 		</div>
+	</div>
 
-        <!--
-		<h1>Dinner planner</h1>
-		<div id="exampleView">
-			<div>
-				Number of guests: <span id="numberOfGuests"></span>
+
+
+
+
+
+<!--dishDetailPage-->
+	<div class="container" id="dishDetailPage">
+	<!--title-->
+		<div class="row box">
+			<h1>HOMELETTE</h1>
+			<p>From the best chefs in the world directly into your kitchen</p>
+		</div>
+
+
+		<div  class="row box">
+
+		<!--cost view-->
+			<div class="col-md-2">
+				<table class="table">
+				<tr><h3>My Dinner</h3></tr>
+				<tr>
+					<td>People</td>
+					<td>
+                    <input type = "number" min="0" max="1000" width = "5px" id="numberOfGuests" onchange="changeNumOfGuests()">
+					</td>
+				</tr>
+
+				<tr>
+					<td >Dish Name</td>
+					<td style="text-align:right;" >cost</td>	 
+				</tr>
+				<tr>
+					<td>pending</td>
+					<td style="text-align:right;">0.00</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align:right;">SEK 0.00</td>
+				</tr>
+				<tr>
+					<td colspan="2"><button type="button" id="confirmDinner" style="width:100%; ">Confirm Dinner</button></td>
+					
+				</tr>
+				</table> 	 
 			</div>
-			<div>
-          <button id="minusGuest" class="btn" onclick="changeNumOfGuests()"><span class="glyphicon glyphicon-minus"></span></button>
-				<button id="plusGuest" class="btn" onclick="changeNumOfGuests()"><span class="glyphicon glyphicon-plus"></span></button>
+		<!--dish view-->
+			<div class="col-md-10 dishcontainer2">
+
+				<!--dish detail-->
+				<div class="row" id = "SelectDishView">
+
+					<div class="col-md-5 dish2">
+						<div class="dishtitle">lasagne</div>
+										
+						<div class="dishimg">
+						<img src="images/lasagne.jpg">
+						</div>
+
+						<div class="dishdescription">
+							In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot. 
+						</div>
+
+
+						<div><button type="button" id="backToMenu" style="width:200px;margin: 5px; ">Back to Select Dish</button></div>
+				    	
+				 	</div>
+
+				 	<div class="col-md-5 ingredients">
+						<table class="ingtable">
+
+							<tr style="border-bottom: 1px solid gray; padding-bottom: 20px;">
+							<th colspan="4" style="padding-bottom: 10px;">
+							Ingredients for <span class = "numberOfPeople"></span> people</th>
+							</tr>
+
+							<tbody id = "dishIngre"></tbody>
+                        <!--
+							<tr>
+							<td>bsp</td>
+							<td style="width: 55%;">olive oil</td>
+							<td>SEK</td>
+							<td>0.20</td>
+							</tr>
+						-->
+					
+						</table>
+
+						<div><button type="button" style="width:200px;margin: 5px; ">Confirm Dish</button></div>
+				    	
+				 	</div>
+
+				</div>
+
+				<div class="row">
+				<div class="preparation">Preparation</div>
+					
+				</div>
+
 			</div>
 		</div>
-        -->
 
 	</div>
 
+
+
+<!--overviewPage         显示格式有问题？？？-->
+<div class="container" id="overviewPage">
+		<div class="row box">
+			<h1>HOMELETTE</h1>
+			<p>From the best chefs in the world directly into your kitchen</p>
+		</div>
+
+		<div class="row box" id="filter2">
+			<div div class="col-md-9">
+				<h2>My Dinner: 4 people</h2>
+			</div>
+			<div div class="col-md-3" style="padding-top:25px;">
+				<button type="button" >Go Back and Edit Dinner</button>
+			</div>
+		</div>
+
+		<div  class="row box" id = "OverviewDinnerView">
+                <!--
+				    <div class="col-md-2">
+						<div class="dish">
+						<div><img src="images/bakedbrie.jpg"></div>
+						<div class="dishname">lasagne</div>
+						</div>
+						<div class="price">
+							83.40 SEK
+						</div>
+				    </div>
+
+                -->
+                <center><div id = "listSelectDishes"></div></center>
+
+				    <div class="col-md-2" style="border-">
+				    	<div class="total" ><p>Total:</p></div>
+						<div class="price" id = "totalPrice"></div>
+				    </div>
+		</div>
+		<div class="row box">
+		<div class="col-md-2 col-md-offset-5">
+			<button type="button" id="printFullRcp" style="margin: 10px 10px 5px 25px;">Print Full Recipe</button>
+		</div>
+		</div>
+				
+		
+	</div>
+    
+
+	
+
+
+
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
+    
+    <!--show only one page -->  
+    <script type="text/javascript">
+    $(document).ready(function(){
+      //startPage
+      $("#menuPage").hide();
+      $("#dishDetailPage").hide();
+	  $("#overviewPage").hide();
+	  $("#printPage").hide();
+
+      
+	  
+      $(".btnStart").click(function(){
+      $("#startPage").hide();
+      $("#menuPage").show();
+      $("#dishDetailPage").hide();
+	  $("#overviewPage").hide();
+	  $("#printPage").hide();
+	  document.getElementById("demo").innerHTML =
+		"Page location is " + window.location.href;
+      });
+
+      //menuPage
+      $("#listAllDishes").click(function(){
+      $("#startPage").hide();
+      $("#menuPage").hide();
+      $("#dishDetailPage").show();
+	  $("#overviewPage").hide();
+	  $("#printPage").hide();
+
+      });
+      //dishDetailPage
+      $("#backToMenu").click(function(){
+      $("#startPage").hide();
+      $("#menuPage").show();
+      $("#dishDetailPage").hide();
+	  $("#overviewPage").hide();
+	  $("#printPage").hide();
+      });
+      //overviewPage
+      $("#confirmDinner").click(function(){
+      $("#startPage").hide();
+      $("#menuPage").hide();
+      $("#dishDetailPage").hide();
+	  $("#overviewPage").show();
+	  $("#printPage").hide();
+      });
+      //printPage
+      $("#printFullRcp").click(function(){
+      $("#startPage").hide();
+      $("#menuPage").hide();
+      $("#dishDetailPage").hide();
+      $("#overviewPage").hide();
+      $("#printPage").show();
+      });
+
+
+
+    });
+    </script>
+
+
+
+
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 
