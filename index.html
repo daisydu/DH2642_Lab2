@@ -14,6 +14,8 @@
 
   </head>
   
+  <body>  
+	<div class="container">
   <body>
 
 <!--startPage-->
@@ -27,7 +29,6 @@
 	    } /*怎么调整背景位置？*/
 	    
 	    </style>
-
 
 	    <script type="text/javascript">
 		var body = document.getElementsByTagName('body')[0];
@@ -51,182 +52,113 @@
 
 	</div>
 
-
-
 <!--menuPage-->
 	<div class="container" id="menuPage">
 		<div class="row box">
 			<h1>HOMELETTE</h1>
 			<p id="demo">From the best chefs in the world directly into your kitchen</p>
 		</div>
+
 		<div  class="row box">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<table class="table">
-				<tr><h3>My Dinner</h3></tr>
-				<tr>
-					<td>People</td>
-					<td>
-                    <input type = "number" min="0" max="1000" width = "5px" id="numberOfGuests" onchange="changeNumOfGuests()">
-					</td>
-				</tr>
-				<!--不知道怎么扩大table的区域？？？-->
-				<tr>
-					<td >Dish Name</td>
-					<td style="text-align:right;" >cost</td>	 
-				</tr>
-				<tr>
-					<td>pending</td>
-					<td style="text-align:right;">0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align:right;">SEK 0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2"><button type="button" id="confirmDinner" style="width:100%; ">Confirm Dinner</button></td>
-					
-				</tr>
+					<tr><h3>My Dinner</h3></tr>    
+	                <tr>
+		                Number of Guests: <div id = "GuestNumberView"> 
+		                	<button id="minusGuest" class="btn"><span class="glyphicon glyphicon-minus"></span></button>
+							<button id="plusGuest" class="btn"><span class="glyphicon glyphicon-plus"></span></button>
+			            	<span id="numberOfGuests"></span>
+			            </div>
+	     			</tr>
+
+                    <div id ="DinnerMenuView">
+                    	<div id="dinnerMenu"></div>
+                    </div>
+           <!--
+				<table class="table"> 
+					<tr>
+						<td >Dish Name</td>
+						<td style="text-align:right;" >cost</td>	 
+					</tr>
+					<tr>
+						<td>pending</td>
+						<td style="text-align:right;">0.00</td>
+					</tr>
+					<tr>
+						<td colspan="2" style="text-align:right;">SEK 0.00</td>
+					</tr>
+				</table>
+            -->
+					<tr>
+						<td colspan="2"><button type="button" style="width:100%;" id="confirmDinner">Confirm Dinner</button></td>	
+					</tr>
 				</table> 	 
 			</div>
 
-			<div class="col-md-10">
-				<div class="row box" id="filter">
+<!--Dish Display-->
+			<div class="col-md-9" id="dishMenu">
+				<div class="row box" id = "ListDishesView">
 					<div class="col-md-12">
 						<h3>select dish</h3>
 				    </div>
 
-					<div class="row">
+					<div class="row" >
 						<div class="col-md-6">
 							<div class="col-md-6">
-								<input class="form-control" type="text" placeholder="Enter key words">
+								<input class="form-control" type="text" placeholder="Enter key words" id="keyWords">
 							</div>
 							<div class="col-md-3">
-								<button type="submit" class="btn btn-primary">Search</button>							
+								<button type="submit" class="btn btn-primary" id = "search">Search</button>			
 						    </div>	
 						</div>
 						
 						<div class="col-md-3">
-							<select class="form-control">
-								<option>Starter</option>
-								<option>Main Dishes</option>
-								<option>Dessert</option>
+							<select class="form-control" id = "selection" >
+								<option value="all" selected>All</option>
+								<option value="starter" >Starter</option>
+								<option value="main dish" >Main Dishes</option>
+								<option value="dessert" >Dessert</option>
 							</select>
 						</div>
 					</div>
-				</div>
-
-				<div class="row dishcontainer" id = "ListDishesView">
-					
-                   	<span id="listAllDishes"></span>
-				    
-				</div>
-				
+                    <div class="row dishcontainer">
+                   		<span id="listAllDishes"></span>
+					</div>
+				</div>	
 			</div>
-		</div>
-	</div>
+<!--Dish Display-->
 
-
-
-
-
-
-<!--dishDetailPage-->
-	<div class="container" id="dishDetailPage">
-	<!--title-->
-		<div class="row box">
-			<h1>HOMELETTE</h1>
-			<p>From the best chefs in the world directly into your kitchen</p>
-		</div>
-
-
-		<div  class="row box">
-
-		<!--cost view-->
-			<div class="col-md-2">
-				<table class="table">
-				<tr><h3>My Dinner</h3></tr>
-				<tr>
-					<td>People</td>
-					<td>
-                    <input type = "number" min="0" max="1000" width = "5px" id="numberOfGuests" onchange="changeNumOfGuests()">
-					</td>
-				</tr>
-
-				<tr>
-					<td >Dish Name</td>
-					<td style="text-align:right;" >cost</td>	 
-				</tr>
-				<tr>
-					<td>pending</td>
-					<td style="text-align:right;">0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2" style="text-align:right;">SEK 0.00</td>
-				</tr>
-				<tr>
-					<td colspan="2"><button type="button" id="confirmDinner" style="width:100%; ">Confirm Dinner</button></td>
-					
-				</tr>
-				</table> 	 
-			</div>
-		<!--dish view-->
-			<div class="col-md-10 dishcontainer2">
-
+<!--Select Dish view-->
+			<div class="col-md-9 dishcontainer2" id="dishView">
 				<!--dish detail-->
 				<div class="row" id = "SelectDishView">
-
 					<div class="col-md-5 dish2">
-						<div class="dishtitle">lasagne</div>
-										
-						<div class="dishimg">
-						<img src="images/lasagne.jpg">
-						</div>
-
-						<div class="dishdescription">
-							In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot. 
-						</div>
-
-
-						<div><button type="button" id="backToMenu" style="width:200px;margin: 5px; ">Back to Select Dish</button></div>
-				    	
+						<div class="dishtitle" id="dishName"></div>					
+						<div class="dishimg" id ="dishImg"></div>
+						<div class="dishdescription" id="dishInfo"></div>
+						<div><button type="button" class="backToMenu" style="width:200px;margin: 5px; ">Back to Select Dish</button></div>
 				 	</div>
 
 				 	<div class="col-md-5 ingredients">
 						<table class="ingtable">
-
 							<tr style="border-bottom: 1px solid gray; padding-bottom: 20px;">
 							<th colspan="4" style="padding-bottom: 10px;">
 							Ingredients for <span class = "numberOfPeople"></span> people</th>
 							</tr>
-
 							<tbody id = "dishIngre"></tbody>
-                        <!--
-							<tr>
-							<td>bsp</td>
-							<td style="width: 55%;">olive oil</td>
-							<td>SEK</td>
-							<td>0.20</td>
-							</tr>
-						-->
-					
+							<tbody id = "dishPrice"></tbody>
 						</table>
-
-						<div><button type="button" style="width:200px;margin: 5px; ">Confirm Dish</button></div>
-				    	
-				 	</div>
-
-				</div>
-
-				<div class="row">
-				<div class="preparation">Preparation</div>
-					
-				</div>
-
+                        <div><button type="button" style="width:200px;margin: 5px;" class="confirm">Confirm Dish</div>
+                        <!-- 第一步 设置一个id,当点击菜以后，将选择的菜的id赋值给这个event，用jquery赋值
+                             点击以后 这个值传送到后台，然后trigue 加入menu这个函数
+                        -->
+					</div>	
+				 </div>
 			</div>
+<!--Select Dish view-->
 		</div>
-
 	</div>
-
-
+</div>
 
 <!--overviewPage         显示格式有问题？？？-->
 <div class="container" id="overviewPage">
@@ -235,14 +167,21 @@
 			<p>From the best chefs in the world directly into your kitchen</p>
 		</div>
 
+<<<<<<< HEAD
+        <!--
+		<h1>Dinner planner</h1>
+		
+        -->
+=======
 		<div class="row box" id="filter2">
 			<div div class="col-md-9">
 				<h2>My Dinner: 4 people</h2>
 			</div>
 			<div div class="col-md-3" style="padding-top:25px;">
-				<button type="button" >Go Back and Edit Dinner</button>
+				<button type="button" class="backToMenu">Go Back and Edit Dinner</button>
 			</div>
 		</div>
+>>>>>>> master
 
 		<div  class="row box" id = "OverviewDinnerView">
                 <!--
@@ -269,16 +208,9 @@
 			<button type="button" id="printFullRcp" style="margin: 10px 10px 5px 25px;">Print Full Recipe</button>
 		</div>
 		</div>
-				
-		
+					
 	</div>
     
-
-	
-
-
-
-
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
     
@@ -287,16 +219,13 @@
     $(document).ready(function(){
       //startPage
       $("#menuPage").hide();
-      $("#dishDetailPage").hide();
 	  $("#overviewPage").hide();
 	  $("#printPage").hide();
-
-      
-	  
+ 
       $(".btnStart").click(function(){
       $("#startPage").hide();
       $("#menuPage").show();
-      $("#dishDetailPage").hide();
+      $("#menuPage #dishView").hide();
 	  $("#overviewPage").hide();
 	  $("#printPage").hide();
 	  document.getElementById("demo").innerHTML =
@@ -306,17 +235,18 @@
       //menuPage
       $("#listAllDishes").click(function(){
       $("#startPage").hide();
-      $("#menuPage").hide();
-      $("#dishDetailPage").show();
+      $("#menuPage").show();
+      $("#menuPage #dishMenu").hide();
+      $("#menuPage #dishView").show();
 	  $("#overviewPage").hide();
 	  $("#printPage").hide();
 
       });
       //dishDetailPage
-      $("#backToMenu").click(function(){
+      $(".backToMenu").click(function(){
       $("#startPage").hide();
-      $("#menuPage").show();
-      $("#dishDetailPage").hide();
+      $("#menuPage #dishMenu").show();
+      $("#menuPage #dishView").hide();
 	  $("#overviewPage").hide();
 	  $("#printPage").hide();
       });
@@ -324,7 +254,6 @@
       $("#confirmDinner").click(function(){
       $("#startPage").hide();
       $("#menuPage").hide();
-      $("#dishDetailPage").hide();
 	  $("#overviewPage").show();
 	  $("#printPage").hide();
       });
@@ -332,18 +261,12 @@
       $("#printFullRcp").click(function(){
       $("#startPage").hide();
       $("#menuPage").hide();
-      $("#dishDetailPage").hide();
       $("#overviewPage").hide();
       $("#printPage").show();
       });
 
-
-
     });
     </script>
-
-
-
 
     <!-- Bootstrap JavaScript, needed if you want for instance tabs, models, popovers etc. -->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>

@@ -13,9 +13,16 @@ var GuestNumberViewController = function(view, model) {
 
 var ListDishesViewController = function(view, model){
   view.selectType.change(function(){
-  	//console.log(view.selectType.val());
   	var dishType = view.selectType.val();
   	model.setSelectedDish(dishType);
+
+    $(".selectDish").on("click",function(){
+        var value = [];
+        var selectClass = $(".selectDish");
+        var id = $(this).attr('id');
+        //console.log(id);
+        model.setDishID(id); 
+      });
   });
    
   view.search.click(function(){
@@ -23,13 +30,28 @@ var ListDishesViewController = function(view, model){
   	model.setFilter(filter);
   });
 
+<<<<<<< HEAD
+  $(".selectDish").on("click",function(){
+=======
   view.selectDish.click(function(){
+>>>>>>> master
     var value = [];
     var selectClass = $(".selectDish");
     var id = $(this).attr('id');
-    console.log(id);
-    model.setDishID(id); 
+    //console.log(id);
+    model.setDishID(id);
+    $(".confirm").attr('id',id);
   });
-}
 
+  $(".confirm").on("click",function(){  
+    var id = $(this).attr('id');
+    model.addDishToMenu(id);
+  });
+
+  $("#confirmDinner").on("click",function(){
+    console.log("confirm confirmDinner");
+    model.notify("confirmDinner");
+  })
+
+}
 
