@@ -103,30 +103,50 @@ var DinnerModel = function() {
         return dishesOnMenu;
 	}
 
+    this.getDishName = function(id){
+    	var thisDish;
+    	thisDish = this.getDish(id);
+    	var dishName = thisDish.name;
+    	return dishName;
+    }
+
+    this.getDishImg = function(id){
+    	var thisDish;
+    	thisDish = this.getDish(id);
+    	var dishImg = thisDish.image;
+    	return dishImg;
+    }
+
+    this.getDishInfo = function(id){
+    	var thisDish;
+    	thisDish = this.getDish(id);
+    	var dishInfo = thisDish.description;
+    	return dishInfo;
+    }
+
 	this.getDishIngredients = function(id) {
 		var thisDish;
 		thisDish = this.getDish(id);
-		//console.log(thisDish);
 		var ingredients = thisDish.ingredients;
-		var amount;
+		/*
 		var guestNum = this.getNumberOfGuests();
-
+		//console.log(guestNum);
 		for (var j = 0; j < ingredients.length; j++) {
 				ingredients[j].quantity = guestNum * ingredients[j].quantity;
 				ingredients[j].price = guestNum * ingredients[j].price;
 			};
-
+			*/
 		return ingredients;
 	}
 
 	this.getTotalDishPrice = function(id){
 		var thisDish;
-		ingredients = this.getDishIngredients(id);
-		//console.log("how many ingredients: "+ingredients.length);
+		thisDish = this.getDish(id);
+		var ingredients = thisDish.ingredients;
+		//ingredients = this.getDishIngredients(id);
 		var totalPrice = 0;
 		for (var i = 0; i < ingredients.length; i++) {
 			totalPrice += ingredients[i].price;
-			console.log(ingredients[i]);
 		};
 		return totalPrice;
 	}
@@ -160,8 +180,7 @@ var DinnerModel = function() {
         for (var i = 0; i < allIngredients.length; i++) {
         	totalPrice += (allIngredients[i].price * guestNum);
         	//console.log(totalPrice);
-        };  
-        
+        };       
         return totalPrice;
 	}
 
@@ -170,6 +189,8 @@ var DinnerModel = function() {
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
         menu.push(id);
+        //console.log(menu);  Can successfully add the menu
+        this.notify("addMenu");
         return menu;
 	}
 
@@ -246,7 +267,7 @@ var DinnerModel = function() {
 	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
 	var dishes = [{
 		'id':1,
-		'name':'French toast 123',
+		'name':'French toast',
 		'type':'starter',
 		'image':'toast.jpg',
 		'description':"In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.",
@@ -281,7 +302,7 @@ var DinnerModel = function() {
 		'name':'Sourdough Starter',
 		'type':'starter',
 		'image':'sourdough.jpg',
-		'description':"Here is how you make it... Lore ipsum...",
+		'c':"Here is how you make it... Lore ipsum...",
 		'ingredients':[{ 
 			'name':'active dry yeast',
 			'quantity':0.5,
