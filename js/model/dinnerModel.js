@@ -141,9 +141,15 @@ var DinnerModel = function() {
 
 	this.getTotalDishPrice = function(id){
 		var thisDish;
+<<<<<<< HEAD
 		thisDish = this.getDish(id);
 		var ingredients = thisDish.ingredients;
 		//ingredients = this.getDishIngredients(id);
+=======
+		ingredients = this.getDishIngredients(id);
+		console.log(ingredients);
+		//console.log("how many ingredients: "+ingredients.length);
+>>>>>>> master
 		var totalPrice = 0;
 		for (var i = 0; i < ingredients.length; i++) {
 			totalPrice += ingredients[i].price;

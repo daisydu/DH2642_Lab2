@@ -30,7 +30,11 @@ var ListDishesViewController = function(view, model){
   	model.setFilter(filter);
   });
 
+<<<<<<< HEAD
   $(".selectDish").on("click",function(){
+=======
+  view.selectDish.click(function(){
+>>>>>>> master
     var value = [];
     var selectClass = $(".selectDish");
     var id = $(this).attr('id');
@@ -50,5 +54,4 @@ var ListDishesViewController = function(view, model){
   })
 
 }
-
 
