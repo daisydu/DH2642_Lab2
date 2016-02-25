@@ -43,6 +43,12 @@ var ListDishesViewController = function(view, model){
     var id = $(this).attr('id');
     model.addDishToMenu(id);
   });
+
+  $("#confirmDinner").on("click",function(){
+    console.log("confirm confirmDinner");
+    model.notify("confirmDinner");
+  })
+
 }
 
 

@@ -72,7 +72,7 @@
 	     			</tr>
 
                     <div id ="DinnerMenuView">
-                 		<div id="dinnerMenu"></div>
+                    	<div id="dinnerMenu"></div>
                     </div>
            <!--
 				<table class="table"> 
@@ -90,7 +90,7 @@
 				</table>
             -->
 					<tr>
-						<td colspan="2"><button type="button" style="width:100%; ">Confirm Dinner</button></td>	
+						<td colspan="2"><button type="button" style="width:100%;" id="confirmDinner">Confirm Dinner</button></td>	
 					</tr>
 				</table> 	 
 			</div>
@@ -136,7 +136,7 @@
 						<div class="dishtitle" id="dishName"></div>					
 						<div class="dishimg" id ="dishImg"></div>
 						<div class="dishdescription" id="dishInfo"></div>
-						<div><button type="button" id="backToMenu" style="width:200px;margin: 5px; ">Back to Select Dish</button></div>
+						<div><button type="button" class="backToMenu" style="width:200px;margin: 5px; ">Back to Select Dish</button></div>
 				 	</div>
 
 				 	<div class="col-md-5 ingredients">
@@ -178,7 +178,7 @@
 				<h2>My Dinner: 4 people</h2>
 			</div>
 			<div div class="col-md-3" style="padding-top:25px;">
-				<button type="button" >Go Back and Edit Dinner</button>
+				<button type="button" class="backToMenu">Go Back and Edit Dinner</button>
 			</div>
 		</div>
 >>>>>>> master
@@ -243,7 +243,7 @@
 
       });
       //dishDetailPage
-      $("#backToMenu").click(function(){
+      $(".backToMenu").click(function(){
       $("#startPage").hide();
       $("#menuPage #dishMenu").show();
       $("#menuPage #dishView").hide();
