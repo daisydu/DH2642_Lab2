@@ -48,9 +48,8 @@ var DinnerMenuView = function(container,model){
 					"</tr>" +
 				"</table>";
 	this.dinnerMenu.html(menuList);
-	
+
 	this.update = function(args){
-		//addMenu update
 		if (args == "addMenu") {
 			this.dinnerMenu = container.find("#dinnerMenu");
 			var menu = model.getFullMenu();
@@ -93,7 +92,7 @@ var DinnerMenuView = function(container,model){
 	    	 var name = menu[i].name;
 	    	 var price = model.getTotalDishPrice(id);
 	    	 var totalPrice = model.getTotalMenuPrice();
-	    
+
        		 menuList += "<table class=\"table\">" + 
 					"<tr>" +
 						"<td>"+ name +"</td>" +
@@ -122,7 +121,6 @@ var DinnerMenuView = function(container,model){
 		};
 	}
 	//removeMenu update
-
 }
 
 var ListDishesView = function (container, model){
