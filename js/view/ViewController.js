@@ -35,6 +35,7 @@ var ListDishesViewController = function(view, model){
     var value = [];
     var selectClass = $(".selectDish");
     var id = $(this).attr('id');
+
     model.setDishID(id);
     $(".confirm").attr('id',id);
   });
@@ -43,6 +44,15 @@ var ListDishesViewController = function(view, model){
     var id = $(this).attr('id');
     model.addDishToMenu(id);
   });
+
+  //remove dish function
+  $(".removeDish").on("click",function(){
+    var id = $(this).attr('id');
+    console.log(id);
+    model.removeDishFromMenu(id);
+    // console.log(model.removeDishFromMenu(id));
+  })
+
 
   $("#confirmDinner").on("click",function(){
     console.log("confirm confirmDinner");

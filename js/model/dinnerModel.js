@@ -187,17 +187,27 @@ var DinnerModel = function() {
 	//it is removed from the menu and the new one added.
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
-        menu.push(id);
-        //console.log(menu);  Can successfully add the menu
+
+        menu.push(id); //push上去的id是字符串形式
+        console.log(menu); // Can successfully add the menu
         this.notify("addMenu");
-        return menu;
+        // return menu;
+
 	}
 
 	//Removes dish from menu
 	this.removeDishFromMenu = function(id) {
-		//TODO Lab 2
-		var index = menu.indexOf("id");
-		delete menu[index];
+		console.log(id); 
+
+		for (var i = 0; i< menu.length; i++) {
+			if (menu[i] == id) {
+				console.log(menu[i]);
+				menu.splice(i,1);
+			};
+		};
+		console.log(menu); 
+		this.notify("removeDish");
+
 	}
 
 	//function that returns all dishes of specific type (i.e. "starter", "main dish" or "dessert")
