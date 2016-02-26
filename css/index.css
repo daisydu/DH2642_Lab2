@@ -1,0 +1,217 @@
+    /*startPage CSS*/
+
+    
+    .title{
+        background: rgba(249,229,156,0.8);
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 0px;
+        padding-bottom: 10px;
+        border: 0.5px solid gray; 
+        
+    }
+    .createbox{
+        background: rgba(255,255,255,0.8);
+        position: relative;
+        top: 200px;
+        height: 250px;
+        width: 500px;
+    }
+    .boxtitle{
+        font-size: 24px;
+        padding: 20px 20px 0px 20px;
+    }
+    .boxcontent{
+        font-size: 14px;
+        position: relative;
+        top: -20px;
+        padding: 0px 20px 0px 20px;
+    }
+    .startbutton{
+        font-size: 14px;
+        position: relative;
+        top: 40px;
+        padding: 0px 20px 0px 20px;
+    }
+    .btnStart{
+        position:relative; 
+        top:30px;
+        margin: 20px;
+    }    
+
+
+    /*menuPage CSS*/
+    .box{ 
+    	margin-top: 10px;
+    	margin-bottom: 10px;
+    	padding-left: 5px;
+    	padding-right: 5px;
+    	padding-top: 0px;
+        padding-bottom: 10px;
+        border: 0.5px solid gray; 
+    }/*dishDetail repeat, overviewPage repeat, printPage*/
+
+    #filter{
+    	background: rgb(249,229,156)
+    }
+
+    .table{
+    	border: 0.5px solid gray; 
+    }/*dishDetail repeat, overviewPage repeat*/
+
+    .dishcontainer{
+    	margin-top: 10px;
+    	margin-bottom: 10px;
+    	padding: 0px 0px 10px 10px;
+        border: 0.5px solid gray; 
+    }/*, overviewPage repeat*/
+    .dishbox{
+    	margin: 10px 20px 10px 10px;
+    	padding: 0px 0px 10px 0px;
+    	/*border: 0.5px solid gray; */
+    }/*dishDetail repeat, overviewPage repeat*/
+
+    .dish{
+    	margin: 5px;
+    	padding: 5px;
+    	border: 0.5px solid gray; 
+    }/*, overviewPage repeat, printPage*/
+    .dish img{
+    	width: 100%;
+    	height: 100px;
+    }/*, printPage*/
+    .dishname{
+  		text-align: center;  
+  			
+    }/*, overviewPage repeat*/
+
+    .description{
+    	height: 72px;
+    	padding: 5px;
+    	text-align: justify;
+    	font-size: 12px;
+    	overflow: hidden;
+    }
+
+
+
+    /*dishDetailPage*/
+
+    .ingtable{
+        width: 100%;
+
+        border-bottom: 1px solid gray;
+    }
+
+    .ingtable tr td{
+        width: 15%;
+        padding:5px 0px;
+    }
+
+
+
+    .dishcontainer2{
+        border: 0.5px solid gray; 
+    }
+
+
+
+    .dish2{
+        margin: 5px;
+        padding: 20px;
+        margin-right: 100px;
+
+    }
+
+    .dishimg{
+        margin: 30px 5px 10px 5px;
+ 
+    }
+
+    .dishimg img{
+        width: 100%;
+        height: 100px;
+    }
+    .dishtitle{
+        width: 100%;
+        height: 20px;
+        padding-left: 5px;
+        font-size: 30px;
+        font-style: bold;  
+            
+    }
+
+    .dishdescription{
+        width: 400px;
+        padding: 5px;
+        text-align: justify;
+    }
+
+    .ingredients{
+        margin-left:20px;
+        padding: 20px;
+        background-color: rgb(249,229,156);
+
+        border: 0.5px solid gray; 
+
+    }
+    .preparation{
+        font-size: 30px; 
+        font-style: bold; 
+        padding-left: 25px;
+    }
+
+
+
+    /*overviewPage*/
+    #filter2{
+        padding-top: 5px;
+        background: rgb(249,229,156)
+    }/*, printPage*/
+
+    .total{
+        height:140px; 
+        position: relative;"
+    }
+    .total p{
+        position: absolute;
+        bottom: 0px;
+        padding:0px;
+        margin: 0px;
+
+    }
+
+    .price{
+        height: 20px;
+        padding: 5px;
+        text-align: right;
+
+    }
+
+
+    /*printPage*/
+    .dishimg2{
+        padding: 20px; 
+    }
+
+    .dishname2{
+        font-weight: 600;
+        font-size: 22px;
+            
+    }
+    .dishtext{
+        padding-top: 10px;
+
+    }
+    .dishinfo{
+        padding: 20px; 
+    }
+    .dishpre{
+        padding: 10px;      
+    }
+    .dishpretitle{
+        font-weight: 400;
+        font-size: 18px;
+    }
