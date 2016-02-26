@@ -6,6 +6,8 @@ $(function() {
 	//And create the needed controllers and views
 	var guestNumberView = new GuestNumberView($("#GuestNumberView"),model);
 	var guestNumberViewController = new GuestNumberViewController(guestNumberView,model);
+    
+    var dinnerMenuView = new DinnerMenuView($("#DinnerMenuView"),model);
 
 	var listDishesView = new ListDishesView($("#ListDishesView"),model);
 	var listDishesViewController = new ListDishesViewController(listDishesView,model);
