@@ -20,9 +20,10 @@ var ListDishesViewController = function(view, model){
         var value = [];
         var selectClass = $(".selectDish");
         var id = $(this).attr('id');
-        //console.log(id);
         model.setDishID(id); 
+         $(".confirm").attr('id',id);
       });
+
   });
    
   view.search.click(function(){
@@ -35,7 +36,6 @@ var ListDishesViewController = function(view, model){
     var selectClass = $(".selectDish");
     var id = $(this).attr('id');
 
-    console.log(id);
     model.setDishID(id);
     $(".confirm").attr('id',id);
   });
@@ -59,6 +59,12 @@ var ListDishesViewController = function(view, model){
     model.notify("confirmDinner");
   })
 
+}
+
+var OverviewController = function(view,model){
+  $("#printFullRcp").on("click",function(){
+    model.notify("printFullRcp");
+  })
 }
 
 

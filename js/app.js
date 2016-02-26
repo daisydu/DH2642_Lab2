@@ -12,7 +12,8 @@ $(function() {
 	var listDishesView = new ListDishesView($("#ListDishesView"),model);
 	var listDishesViewController = new ListDishesViewController(listDishesView,model);
 
-    var overviewDinnerView = new OverviewDinnerView($("#OverviewDinnerView"),model);
+    var overviewDinnerView = new OverviewDinnerView($("#overviewPage"),model);
+    var overviewController = new OverviewController(overviewDinnerView,model);
 
     var preparationView = new PreparationView($("#PreparationView"),model);
 

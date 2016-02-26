@@ -170,9 +170,13 @@ var ListDishesView = function (container, model){
 							   "</div></a>" + 
 							   "<div class=\"description\"> " + dishes[i].description + "</div>" +
 					      "</div>";
-					  }
+		}
         this.listAllDishes.html(alldishesHtml);
 
+        $(".confirm").on("click",function(){  
+	    var id = $(this).attr('id');
+	    model.addDishToMenu(id);
+	    });
  	};
  } 
 }
@@ -268,14 +272,14 @@ var SelectDishView = function (container, model){
 
 	this.dishIngre.html(getIngre + " SEK " + totalPrice);
 	*/
-	
-
 }
 
 var OverviewDinnerView = function (container, model){
 	model.attach(this);
 	this.update = function(args){
 		if (args == "confirmDinner") {
+			this.totalPrice = container.find("#totalPrice");
+    		this.totalPrice.html(model.getTotalMenuPrice());
 			//console.log("I am in confirmDinner");
             // GET The number of people
 			this.numberOfPeople = container.find(".numberOfPeople");
@@ -283,15 +287,21 @@ var OverviewDinnerView = function (container, model){
 			this.listSelectDishes = container.find("#listSelectDishes");
 			var selectDishes = "";
 			var fullMenu = model.getFullMenu();
+
+			this.numberOfPeople = container.find(".numberOfPeople");
+			this.numberOfPeople.html(model.getNumberOfGuests());
+
 			for (var i = 0; i < fullMenu.length; i++) {
-		//var price = model.getTotalDishPrice(i);
+		    var dishID = fullMenu[i].id;
+			var dishPrice = model.getTotalDishPrice(dishID);
+
 			selectDishes += "<div class=\"col-md-2 col-md-offset-0\">" +
 						    "<div class=\"dish\">" +
 						    "<div><img src=\'images/" + fullMenu[i].image + "\' ></div>" +
 						    "<div class=\"dishname\">" + fullMenu[i].name + "</div>" +
 						    "</div>" +
 						    "<div class= \"price\"> " +
-							"25.7" + "SEK" +
+							dishPrice + "SEK" +
 						    "</div>" +
 				        "</div>";
 			};
@@ -299,64 +309,52 @@ var OverviewDinnerView = function (container, model){
 		};
 	}
 
-
 	// // GET The number of people
 	// this.numberOfPeople = container.find(".numberOfPeople");
 	// this.numberOfPeople.html(model.getNumberOfGuests());
 	// Get the list of the selected dishes in the menu
 	this.numberOfPeople = container.find(".numberOfPeople");
 	this.numberOfPeople.html(model.getNumberOfGuests());	
-	var fullMenu = model.getFullMenu();
-	this.printDishes = container.find("#printDishes");
-	var PrintDishes = "";
-    
-	for (var i = 0; i < fullMenu.length; i++) {
-		//var price = model.getTotalDishPrice(i);
 
-		PrintDishes += "<div class=\"row\" >" +	               
-		               "<div class= \"col-md-2 dishimg\">" +
-						  "<div class= \"dish\"> " +
-						  "<div><img src=\'images/" + fullMenu[i].image + "\'></div>" +
-						  "</div>" +
-				       "</div>" +
-				      "<div class= \"col-md-4 dishinfo\" >" +
-						  "<div class=\"dishname\">" + fullMenu[i].name + "</div>" +
-						  "<div class=\"dishtext\">" + fullMenu[i].description +
-						  "</div>" +
-				      "</div>" + 
-				          "<div class= \"col-md-6 dishpre\" >" +
-						  "<div class=\"dishname\"> Preparation </div>" +
-						  "<div class=\"dishtext\">" + fullMenu[i].description +
-						  "</div>" +
-				      "</div>" +
-				      "</div>"
-	};
-
-
-    this.printDishes.html(PrintDishes);
     // Get the full price
-    this.totalPrice = container.find("#totalPrice");
-    this.totalPrice.html(model.getTotalMenuPrice());
+   
 
 }
 
 var PreparationView = function (container, model){
-	this.listAllPreparation = container.find("#listAllPreparation");
-    var selectDishes = "";
+	model.attach(this);
+	this.printDishes = container.find("#printDishes");
     
-    var fullMenu = model.getFullMenu();
+    this.update = function(args){
+    	if (args == "printFullRcp") {
+    		var PrintDishes = "";
+    		var fullMenu = model.getFullMenu();
+ 			console.log(fullMenu.length);
+ 			for (var i = 0; i < fullMenu.length; i++) {
+			//var price = model.getTotalDishPrice(i);
+	        console.log("i am print");
+			PrintDishes += "<div class=\"row\" >" +	               
+			               "<div class= \"col-md-2 dishimg\">" +
+							  "<div class= \"dish\"> " +
+							  "<div><img src=\'images/" + fullMenu[i].image + "\'></div>" +
+							  "</div>" +
+					       "</div>" +
+					      "<div class= \"col-md-4 dishinfo\" >" +
+							  "<div class=\"dishpretitle\">" + fullMenu[i].name + "</div>" +
+							  "<div class=\"dishtext\">" + fullMenu[i].description +
+							  "</div>" +
+					      "</div>" + 
+					          "<div class= \"col-md-5 dishpre\" >" +
+							  "<div class=\"dishpretitle\"> Preparation </div>" +
+							  "<div class=\"dishtext\">" + fullMenu[i].description +
+							  "</div>" +
+					      "</div>" +
+					      "</div>"
+		};
 
-	for (var i = 0; i < fullMenu.length; i++) {
-		selectDishes += " <img src=\'images/" + fullMenu[i].image + "\' "+ fullMenu[i].name + fullMenu[i].description + fullMenu[i].description;
-	};
-
-    this.listAllPreparation.html(selectDishes);
-
-
-    // this is the test code 
-    this.getAllIngre = container.find("#getAllIngre");
-    var allIngre = model.getAllIngredients();
-
+	    this.printDishes.html(PrintDishes);
+    	};
+    }
 }
 
 
