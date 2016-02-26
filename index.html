@@ -20,16 +20,17 @@
 
 <!--startPage-->
 	<div class="container" id="startPage">
-<!--	   
+	   
  <style type="text/css">
-	        body{
-	        background:url(images/Thanksgiving-Dinner.jpg);
+	    body{
+	        background-image:url(images/Thanksgiving-Dinner.jpg);
 	        background-size: 100%, 100%;
-	        margin-left: 15px；
+	        margin-left: 15px;
+
 	    } /*怎么调整背景位置？*/
 	    
 	    </style>
-
+<!--
 	    <script type="text/javascript">
 		var body = document.getElementsByTagName('body')[0];
 		body.style.backgroundImage = 'url(images/Thanksgiving-Dinner.jpg)';
@@ -136,7 +137,7 @@
 						<div class="dishtitle" id="dishName"></div>					
 						<div class="dishimg" id ="dishImg"></div>
 						<div class="dishdescription" id="dishInfo"></div>
-						<div><button type="button" class="backToMenu" style="width:200px;margin: 5px; ">Back to Select Dish</button></div>
+						<div><button type="button" id="backToMenu" style="width:200px;margin: 5px; ">Back to Select Dish</button></div>
 				 	</div>
 
 				 	<div class="col-md-5 ingredients">
@@ -160,56 +161,45 @@
 	</div>
 </div>
 
-<!--overviewPage         显示格式有问题？？？-->
+<!--overviewPage-->
 <div class="container" id="overviewPage">
 		<div class="row box">
 			<h1>HOMELETTE</h1>
 			<p>From the best chefs in the world directly into your kitchen</p>
 		</div>
 
-<<<<<<< HEAD
-        <!--
-		<h1>Dinner planner</h1>
-		
-        -->
-=======
 		<div class="row box" id="filter2">
 			<div div class="col-md-9">
-				<h2>My Dinner: 4 people</h2>
+				<h2>My Dinner: <span class="numberOfPeople"></span> people</h2>
 			</div>
 			<div div class="col-md-3" style="padding-top:25px;">
-				<button type="button" class="backToMenu">Go Back and Edit Dinner</button>
+				<button type="button" id="backToMenu1">Go Back and Edit Dinner</button>
 			</div>
 		</div>
->>>>>>> master
 
-		<div  class="row box" id = "OverviewDinnerView">
-                <!--
-				    <div class="col-md-2">
-						<div class="dish">
-						<div><img src="images/bakedbrie.jpg"></div>
-						<div class="dishname">lasagne</div>
-						</div>
-						<div class="price">
-							83.40 SEK
-						</div>
-				    </div>
-
-                -->
+<!--Body of overview page-->
+    <div id = "OverviewDinnerView">
+		<div  class="row box">
                 <center><div id = "listSelectDishes"></div></center>
-
 				    <div class="col-md-2" style="border-">
 				    	<div class="total" ><p>Total:</p></div>
 						<div class="price" id = "totalPrice"></div>
 				    </div>
 		</div>
+
 		<div class="row box">
-		<div class="col-md-2 col-md-offset-5">
-			<button type="button" id="printFullRcp" style="margin: 10px 10px 5px 25px;">Print Full Recipe</button>
+			<div class="col-md-2 col-md-offset-5">
+				<button type="button" id="printFullRcp" style="margin: 10px 10px 5px 25px;">Print Full Recipe</button>
+			</div>
 		</div>
+    </div>
+<!--Print page-->
+    <div id="print">
+    	<div id = "PreparationView">   
+     		<span id = "printDishes"></span>
 		</div>
-					
-	</div>
+    </div>					
+</div>
     
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery.js"></script>
@@ -223,6 +213,7 @@
 	  $("#printPage").hide();
  
       $(".btnStart").click(function(){
+      $("body").css('background-image', 'none');
       $("#startPage").hide();
       $("#menuPage").show();
       $("#menuPage #dishView").hide();
@@ -243,7 +234,7 @@
 
       });
       //dishDetailPage
-      $(".backToMenu").click(function(){
+      $("#backToMenu").click(function(){
       $("#startPage").hide();
       $("#menuPage #dishMenu").show();
       $("#menuPage #dishView").hide();
@@ -254,15 +245,24 @@
       $("#confirmDinner").click(function(){
       $("#startPage").hide();
       $("#menuPage").hide();
-	  $("#overviewPage").show();
+      $("#overviewPage").show();
+      $("#overviewPage #OverviewDinnerView").show();
+	  $("#overviewPage #print").hide();
+      });
+      //back to Menu
+      $("#backToMenu1").click(function(){
+      $("#startPage").hide();
+      $("#menuPage").show();
+	  $("#overviewPage").hide();
 	  $("#printPage").hide();
       });
       //printPage
       $("#printFullRcp").click(function(){
       $("#startPage").hide();
       $("#menuPage").hide();
-      $("#overviewPage").hide();
-      $("#printPage").show();
+      $("#overviewPage").show();
+      $("#overviewPage #OverviewDinnerView").hide();
+      $("#overviewPage #print").show();
       });
 
     });
