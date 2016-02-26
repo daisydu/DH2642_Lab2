@@ -4,13 +4,45 @@ var DinnerModel = function() {
 	//TODO Lab 2 implement the data structure that will hold number of guest
 	// and selected dinner options for dinner menu
     
-    var num;
-    var numberOfGuests = 10;
+    var numberOfGuests = 1;
     var menu = [1,2,3];
+    var dishType = '';
+    var filter = '';
+    var dishID;
+    this.listeners = [];
+
+    // add an attach function
+    // add an notify function
+    // if the controller model make some changes, for each func that call of notify
+    // and call for the update function in view.js
+    
+    this.attach = function(listener){
+    	this.listeners.push(listener);
+    }
+
+    this.notify = function(args){
+    	/*
+    	for (var i = 0; i < this.listeners.length; i++) {
+    		this.listeners[i].update(args);
+    		//console.log(this.listeners[i]);
+       	};
+       	*/
+        for(key in this.listeners){
+			this.listeners[key].update(args);
+		}
+
+    }
 
 	this.setNumberOfGuests = function(num) {
 		//TODO Lab 2
-	    numberOfGuests = num;
+		if (num < 0) {
+           numberOfGuests
+		}else{
+			numberOfGuests = num;
+		};
+	    
+	    //console.log(numberOfGuests);
+	    this.notify("people");
 	}
 
 	// should return 
@@ -21,18 +53,44 @@ var DinnerModel = function() {
 	}
 
 	//Returns the dish that is on the menu for selected type 
-	this.getSelectedDish = function(type) {
+	this.setSelectedDish = function(type) {
 		//TODO Lab 2
-		var dishType;
 		if ( type == 'starter') {
 			dishType = 'starter';
 		}else if ( type == 'main dish') {
 			dishType = 'main dish';
 		}else if ( type == 'dessert') {
 			dishType = 'dessert';
+		}else if ( type == 'all') {
+			dishType = 'all';
 		};
-		
+		//console.log(dishType);
+		this.notify("dishType");
+	}
+
+	this.getSelectedDish = function(){
 		return dishType;
+	}
+
+	this.setDishID = function(id){
+        dishID = id;
+        //console.log("set id "+ dishID);
+        this.notify("dishDetail");
+	}
+
+	this.getDishID = function(){
+		//console.log("get id"+dishID);
+		return dishID;
+	}
+
+	this.setFilter = function(flt){
+        filter = flt;
+        //console.log("i am " + filter);
+        this.notify("filter");
+	}
+
+	this.getFilter = function(){
+        return filter;
 	}
 
 	//Returns all the dishes on the menu.
@@ -45,25 +103,47 @@ var DinnerModel = function() {
         return dishesOnMenu;
 	}
 
+    this.getDishName = function(id){
+    	var thisDish;
+    	thisDish = this.getDish(id);
+    	var dishName = thisDish.name;
+    	return dishName;
+    }
+
+    this.getDishImg = function(id){
+    	var thisDish;
+    	thisDish = this.getDish(id);
+    	var dishImg = thisDish.image;
+    	return dishImg;
+    }
+
+    this.getDishInfo = function(id){
+    	var thisDish;
+    	thisDish = this.getDish(id);
+    	var dishInfo = thisDish.description;
+    	return dishInfo;
+    }
+
 	this.getDishIngredients = function(id) {
 		var thisDish;
 		thisDish = this.getDish(id);
-		//console.log(thisDish);
 		var ingredients = thisDish.ingredients;
-		var amount;
+		/*
 		var guestNum = this.getNumberOfGuests();
-
+		//console.log(guestNum);
 		for (var j = 0; j < ingredients.length; j++) {
 				ingredients[j].quantity = guestNum * ingredients[j].quantity;
 				ingredients[j].price = guestNum * ingredients[j].price;
 			};
-
+			*/
 		return ingredients;
 	}
 
 	this.getTotalDishPrice = function(id){
 		var thisDish;
-		ingredients = this.getDishIngredients(id);
+		thisDish = this.getDish(id);
+		var ingredients = thisDish.ingredients;
+		//ingredients = this.getDishIngredients(id);
 		var totalPrice = 0;
 		for (var i = 0; i < ingredients.length; i++) {
 			totalPrice += ingredients[i].price;
@@ -94,14 +174,12 @@ var DinnerModel = function() {
         var dish;
         var allIngredients = this.getAllIngredients();
         var guestNum = this.getNumberOfGuests();
-        var totalPrice;
+        var totalPrice = 0;
        
         //The loop to get all the price and pass the value of the price
         for (var i = 0; i < allIngredients.length; i++) {
         	totalPrice += (allIngredients[i].price * guestNum);
-        	//console.log(totalPrice);
-        };  
-        
+        };       
         return totalPrice;
 	}
 
@@ -110,6 +188,8 @@ var DinnerModel = function() {
 	this.addDishToMenu = function(id) {
 		//TODO Lab 2 
         menu.push(id);
+        //console.log(menu);  Can successfully add the menu
+        this.notify("addMenu");
         return menu;
 	}
 
@@ -125,6 +205,29 @@ var DinnerModel = function() {
 	//if you don't pass any filter all the dishes will be returned
 	this.getAllDishes = function (type,filter) {
 		//console.log("filter");
+	if (type == 'all') {
+		//console.log(dishes);
+        return dishes;
+	}else{
+		return $(dishes).filter(function(index,dish) {
+		var found = true;
+		if(filter){
+			found = false;
+			$.each(dish.ingredients,function(index,ingredient) {
+				if(ingredient.name.indexOf(filter)!=-1) {
+					found = true;
+				}
+			});
+			if(dish.name.indexOf(filter) != -1)
+			{
+				found = true;
+			}
+		}
+	  	return dish.type == type && found;
+	  });
+	}
+
+	/*
 	  return $(dishes).filter(function(index,dish) {
 		var found = true;
 		if(filter){
@@ -140,7 +243,8 @@ var DinnerModel = function() {
 			}
 		}
 	  	return dish.type == type && found;
-	  });	
+	  });
+	  */	
 	}
 
 	//function that returns a dish of specific ID
@@ -162,7 +266,7 @@ var DinnerModel = function() {
 	// you just say "5 eggs" and not "5 pieces of eggs" or anything else.
 	var dishes = [{
 		'id':1,
-		'name':'French toast 123',
+		'name':'French toast',
 		'type':'starter',
 		'image':'toast.jpg',
 		'description':"In a large mixing bowl, beat the eggs. Add the milk, brown sugar and nutmeg; stir well to combine. Soak bread slices in the egg mixture until saturated. Heat a lightly oiled griddle or frying pan over medium high heat. Brown slices on both sides, sprinkle with cinnamon and serve hot.",
@@ -197,7 +301,7 @@ var DinnerModel = function() {
 		'name':'Sourdough Starter',
 		'type':'starter',
 		'image':'sourdough.jpg',
-		'description':"Here is how you make it... Lore ipsum...",
+		'c':"Here is how you make it... Lore ipsum...",
 		'ingredients':[{ 
 			'name':'active dry yeast',
 			'quantity':0.5,
